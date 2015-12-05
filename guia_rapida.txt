@@ -1,0 +1,64 @@
+Primero que nada vamos a generar nuestro espacio de trabajo, está va a ser
+una rama (branch), esto es de la forma:
+
+1)  git checkout -b Nueva_Rama
+
+Para fines del proyecto Nueva_Rama := Nombre del integrante, en mi caso,
+
+git checkout -b Antonio
+
+Y automáticamente estaremos posicionado en nuestra nueva rama, en esta rama
+podremos hacer todas la modificaciones pertinentes al proyecto. Para revisar
+en que rama estamos “parados” basta con realizar la siguiente instrucción:
+
+2) git checkout
+
+La cual nos dirá el espacio de trabajo en el que estamos actualmente, siempre
+debemos de estar en nuestra rama.
+
+Para agregar los cambios que tenemos realizados es de la siguiente manera:
+
+3) git add .
+
+Lo cual es que agregar el directorio actual al repositorio, evitemos tener
+archivos de autorrecuperación, podemos eliminarlos fácilmente editando el archivo .gitignore y agregándoles a la lista de exclusión o con un rm *~
+esto va a ser frecuente en los archivos java. Si deseamos agregar un sólo
+archivo sólo lo remitimos a algo de la forma
+
+4) git add nombre_archivo
+
+Una vez que hemos preparado los cambios procedemos a hacer el commit, este
+va a ser nuestro checkpoint al momento de trabajar, recomiendo tener en cuenta
+hacer constantemente commits de lo que estén seguros que es consistente, los haremos
+de la siguiente manera:
+
+5) git commit -m “Descripcion del commit”
+
+Donde la descripcion del commit SI va entre comillas, es importante que esta descripcion
+sea clara pues es con frecuencia la manera más rápida de buscar el chekpoint ideal. Una vez realizado el commit, procedemos a hacer los reflejos en la nube, lo haremos de la 
+siguiente manera:
+
+6) git push origin nombre_rama
+
+Es usual que descuidemos el espacio de trabajo en el que estamos parados y hagamos
+push a una rama distinta, eso genera un error, lo cual no te permite hacer el push
+por lo que sugiero revisar la rama de trabajo. OJO: no hacer push a la rama maestra “master”, los cambios a esta rama deben de tomarse con mayor precaución de tal modo
+que no debe de interferir con el trabajo de los demás integrantes.
+
+Para mantener nuestro repositorio actualizado, basta con estar en la rama maestra
+y con el siguiente comando:
+
+7) git pull
+
+y después:
+
+8) git checkout nombre_rama
+9) git merge master
+
+Con eso obtendremos la versión más actualizada del repositorio a nuestro computador.
+
+Cualquier duda pueden escribirme en slack.
+
+Saludos.
+
+Antonio.
