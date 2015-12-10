@@ -1,5 +1,6 @@
+[QUERY    ] CREATE SEQUENCE moral_nidmoral_seq
 [QUERY    ] CREATE TABLE Moral (
-                            sRFCM VARCHAR NOT NULL,
+                            nIdMoral INTEGER NOT NULL DEFAULT nextval('moral_nidmoral_seq'),
                             sTipo VARCHAR NOT NULL,
                             nDependiente INTEGER DEFAULT 0 NOT NULL,
                             sWeb VARCHAR NOT NULL,
@@ -13,20 +14,23 @@
                             sEstado VARCHAR NOT NULL,
                             sRegion VARCHAR NOT NULL,
                             sZona VARCHAR NOT NULL,
-                            CONSTRAINT srfcm PRIMARY KEY (sRFCM)
+                            sRFC VARCHAR NOT NULL,
+                            CONSTRAINT nidmoral PRIMARY KEY (nIdMoral)
             )
+[QUERY    ] ALTER SEQUENCE moral_nidmoral_seq OWNED BY Moral.nIdMoral
 [QUERY    ] CREATE TABLE telMoral (
                             sTelefono_tM VARCHAR NOT NULL,
-                            sRFC_tM VARCHAR NOT NULL,
+                            sRFC_tM INTEGER NOT NULL,
                             CONSTRAINT stelefono_tm PRIMARY KEY (sTelefono_tM, sRFC_tM)
             )
 [QUERY    ] CREATE TABLE emailMoral (
                             sEmail_eM VARCHAR NOT NULL,
-                            sRFC_eM VARCHAR NOT NULL,
+                            sRFC_eM INTEGER NOT NULL,
                             CONSTRAINT semail_em PRIMARY KEY (sEmail_eM, sRFC_eM)
             )
+[QUERY    ] CREATE SEQUENCE fisica_nidfisica_seq
 [QUERY    ] CREATE TABLE Fisica (
-                            sRFCF VARCHAR NOT NULL,
+                            nIdFisica INTEGER NOT NULL DEFAULT nextval('fisica_nidfisica_seq'),
                             sTCliente VARCHAR NOT NULL,
                             sNombre VARCHAR NOT NULL,
                             sAPaterno VARCHAR NOT NULL,
@@ -47,16 +51,18 @@
                             sEstado VARCHAR NOT NULL,
                             sRegion VARCHAR NOT NULL,
                             sZona VARCHAR NOT NULL,
-                            CONSTRAINT srfcf PRIMARY KEY (sRFCF)
+                            sRFC VARCHAR NOT NULL,
+                            CONSTRAINT nidfisica PRIMARY KEY (nIdFisica)
             )
+[QUERY    ] ALTER SEQUENCE fisica_nidfisica_seq OWNED BY Fisica.nIdFisica
 [QUERY    ] CREATE TABLE telFisica (
                             sTelefonoF VARCHAR NOT NULL,
-                            sRFC_tF VARCHAR NOT NULL,
+                            sRFC_tF INTEGER NOT NULL,
                             CONSTRAINT stelefonof PRIMARY KEY (sTelefonoF, sRFC_tF)
             )
 [QUERY    ] CREATE TABLE emailFisica (
                             sEmailF VARCHAR NOT NULL,
-                            sRFC_eF VARCHAR NOT NULL,
+                            sRFC_eF INTEGER NOT NULL,
                             CONSTRAINT semailf PRIMARY KEY (sEmailF, sRFC_eF)
             )
 [QUERY    ] CREATE SEQUENCE sucursal_nidsucursal_seq
@@ -84,7 +90,7 @@
 [QUERY    ] CREATE TABLE qMoral (
                             nIdQueja_qM INTEGER NOT NULL DEFAULT nextval('qmoral_nidqueja_qm_seq'),
                             nIdSucursal_qM INTEGER NOT NULL,
-                            sRFC_qM VARCHAR NOT NULL,
+                            sRFC_qM INTEGER NOT NULL,
                             dFecha DATE NOT NULL,
                             sService VARCHAR NOT NULL,
                             sAsunto VARCHAR NOT NULL,
@@ -96,7 +102,7 @@
 [QUERY    ] CREATE TABLE qFisica (
                             nIdQueja_qF INTEGER NOT NULL DEFAULT nextval('qfisica_nidqueja_qf_seq'),
                             nIdSucursal_qF INTEGER NOT NULL,
-                            sRFC_qF VARCHAR NOT NULL,
+                            sRFC_qF INTEGER NOT NULL,
                             dFecha DATE NOT NULL,
                             sServicio VARCHAR NOT NULL,
                             sAsunto VARCHAR NOT NULL,
@@ -108,7 +114,7 @@
 [QUERY    ] CREATE TABLE evalFisica (
                             nIdEvaluacion_evF INTEGER NOT NULL DEFAULT nextval('evalfisica_nidevaluacion_evf_seq'),
                             nIdSucursal_evF INTEGER NOT NULL,
-                            sRFC_evF VARCHAR NOT NULL,
+                            sRFC_evF INTEGER NOT NULL,
                             sTiempo VARCHAR NOT NULL,
                             sClaridad VARCHAR NOT NULL,
                             sAtencion VARCHAR NOT NULL,
@@ -121,7 +127,7 @@
 [QUERY    ] CREATE TABLE evalMoral (
                             nIdEvaluacion_evM INTEGER NOT NULL DEFAULT nextval('evalmoral_nidevaluacion_evm_seq'),
                             nIdSucursal_evM INTEGER NOT NULL,
-                            sRFC_evM VARCHAR NOT NULL,
+                            sRFC_evM INTEGER NOT NULL,
                             sTiempo VARCHAR NOT NULL,
                             sClaridad VARCHAR NOT NULL,
                             sAtencion VARCHAR NOT NULL,
@@ -133,7 +139,7 @@
 [QUERY    ] CREATE TABLE CMP (
                             sCuenta_CMP VARCHAR NOT NULL,
                             nIdSucursal_CMP INTEGER NOT NULL,
-                            sRFC_CMP VARCHAR NOT NULL,
+                            sRFC_CMP INTEGER NOT NULL,
                             dFecha DATE NOT NULL,
                             nMonto INTEGER NOT NULL,
                             sTipo VARCHAR NOT NULL,
@@ -147,7 +153,7 @@
 [QUERY    ] CREATE TABLE pagPM (
                             dFecha_pPM DATE NOT NULL,
                             sCuenta_pPM VARCHAR NOT NULL,
-                            sRFC_pPM VARCHAR NOT NULL,
+                            sRFC_pPM INTEGER NOT NULL,
                             OrnIdSucursal_pPM INTEGER NOT NULL,
                             PagnIdSucursal_pPM INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
@@ -155,7 +161,7 @@
             )
 [QUERY    ] CREATE TABLE CFP (
                             sCuentaFP VARCHAR NOT NULL,
-                            sRFC_CFP VARCHAR NOT NULL,
+                            sRFC_CFP INTEGER NOT NULL,
                             nIdSucursal_CFP INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
                             sTipo VARCHAR NOT NULL,
@@ -170,7 +176,7 @@
 [QUERY    ] CREATE TABLE pagPF (
                             dFecha_pPF DATE NOT NULL,
                             sCuenta_pPF VARCHAR NOT NULL,
-                            sRFC_pPF VARCHAR NOT NULL,
+                            sRFC_pPF INTEGER NOT NULL,
                             OrnIdSucursal_pPF INTEGER NOT NULL,
                             PagnIdSucursal_pPF INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
@@ -195,7 +201,7 @@
 [QUERY    ] CREATE TABLE retPrestamoFis (
                             dFecha_rPF VARCHAR NOT NULL,
                             sCuenta_rPF VARCHAR NOT NULL,
-                            sRFC_rPF VARCHAR NOT NULL,
+                            sRFC_rPF INTEGER NOT NULL,
                             OrnIdSucursal_rPF INTEGER NOT NULL,
                             nIdVentanilla_rPF INTEGER NOT NULL,
                             RetnIdSucursal_rPF INTEGER NOT NULL,
@@ -207,7 +213,7 @@
 [QUERY    ] CREATE TABLE retPrestamoMor (
                             dFecha_rPM DATE NOT NULL,
                             sCuenta_rPM VARCHAR NOT NULL,
-                            sRFC_rPM VARCHAR NOT NULL,
+                            sRFC_rPM INTEGER NOT NULL,
                             OrnIdSucursal_rPM INTEGER NOT NULL,
                             nIdVentanilla_rPM INTEGER NOT NULL,
                             RetnIdSucursal_rPM INTEGER NOT NULL,
@@ -216,7 +222,7 @@
             )
 [QUERY    ] CREATE TABLE CMA (
                             sCuentaMA VARCHAR NOT NULL,
-                            sRFC_CMA VARCHAR NOT NULL,
+                            sRFC_CMA INTEGER NOT NULL,
                             nIdSucursal_CMA INTEGER NOT NULL,
                             dFecha DATE NOT NULL,
                             nSaldo INTEGER NOT NULL,
@@ -228,7 +234,7 @@
 [QUERY    ] CREATE TABLE pagAM (
                             dFecha DATE NOT NULL,
                             sCuenta_pAM VARCHAR NOT NULL,
-                            sRFC_pAM VARCHAR NOT NULL,
+                            sRFC_pAM INTEGER NOT NULL,
                             OrnIdSucursal_pAM INTEGER NOT NULL,
                             PagnIdSucursal_pAM INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
@@ -237,7 +243,7 @@
 [QUERY    ] CREATE TABLE retAAM (
                             dFecha_rAAM DATE NOT NULL,
                             sCuenta_rAAM VARCHAR NOT NULL,
-                            sRFC_rAAM VARCHAR NOT NULL,
+                            sRFC_rAAM INTEGER NOT NULL,
                             OrnIdSucursal_rAAM INTEGER NOT NULL,
                             nIdATM_rAAM INTEGER NOT NULL,
                             RetnIdSucursal_rAAM INTEGER NOT NULL,
@@ -247,7 +253,7 @@
 [QUERY    ] CREATE TABLE retAVM (
                             dFecha_rAVM DATE NOT NULL,
                             sCuenta_rAVM VARCHAR NOT NULL,
-                            sRFC_rAVM VARCHAR NOT NULL,
+                            sRFC_rAVM INTEGER NOT NULL,
                             OrnIdSucursal_rAVM INTEGER NOT NULL,
                             nIdVentanilla_rAVM INTEGER NOT NULL,
                             RetnIdSucursal_rAVM INTEGER NOT NULL,
@@ -257,7 +263,7 @@
 [QUERY    ] CREATE TABLE CFA (
                             sCuenta_CFA VARCHAR NOT NULL,
                             nIdSucursal_CFA INTEGER NOT NULL,
-                            sRFCF_CFA VARCHAR NOT NULL,
+                            sRFCF_CFA INTEGER NOT NULL,
                             dFecha DATE NOT NULL,
                             nSaldo INTEGER NOT NULL,
                             nApertura INTEGER DEFAULT 3000 NOT NULL,
@@ -268,7 +274,7 @@
 [QUERY    ] CREATE TABLE TCredito (
                             sTarjeta_TC VARCHAR NOT NULL,
                             sCuenta_TC VARCHAR NOT NULL,
-                            sRFC_TC VARCHAR NOT NULL,
+                            sRFC_TC INTEGER NOT NULL,
                             nIdSucursal_TC INTEGER NOT NULL,
                             sTipo VARCHAR NOT NULL,
                             CONSTRAINT starjeta_tc PRIMARY KEY (sTarjeta_TC, sCuenta_TC, sRFC_TC, nIdSucursal_TC)
@@ -278,7 +284,7 @@
                             sTarjeta_TD VARCHAR NOT NULL,
                             sCuenta_TD VARCHAR NOT NULL,
                             nIdSucursal_TD INTEGER NOT NULL,
-                            sRFCF_TD VARCHAR NOT NULL,
+                            sRFCF_TD INTEGER NOT NULL,
                             CONSTRAINT starjeta_td PRIMARY KEY (sTarjeta_TD, sCuenta_TD, nIdSucursal_TD, sRFCF_TD)
             )
 [QUERY    ] CREATE TABLE retAVF (
@@ -287,7 +293,7 @@
                             RetnIdSucursal_rAVF INTEGER NOT NULL,
                             sCuenta_rAVF VARCHAR NOT NULL,
                             nIdSucursal_rAVF INTEGER NOT NULL,
-                            sRFCF_rAVF VARCHAR NOT NULL,
+                            sRFCF_rAVF INTEGER NOT NULL,
                             dMonto INTEGER NOT NULL,
                             CONSTRAINT dfecha_ravf PRIMARY KEY (dFecha_rAVF, nIdVentanilla_rAVF, RetnIdSucursal_rAVF, sCuenta_rAVF, nIdSucursal_rAVF, sRFCF_rAVF)
             )
@@ -297,7 +303,7 @@
                             RetnIdSucursal_rAAF INTEGER NOT NULL,
                             sCuenta_rAAF VARCHAR NOT NULL,
                             nIdSucursal_rAAF INTEGER NOT NULL,
-                            sRFCF_rAAF VARCHAR NOT NULL,
+                            sRFCF_rAAF INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
                             CONSTRAINT dfecha_raaf PRIMARY KEY (dFecha_rAAF, nIdATM_rAAF, RetnIdSucursal_rAAF, sCuenta_rAAF, nIdSucursal_rAAF, sRFCF_rAAF)
             )
@@ -306,7 +312,7 @@
                             PagnIdSucursal_pAF INTEGER NOT NULL,
                             sCuenta_pAF VARCHAR NOT NULL,
                             OrgnIdSucursal_pAF INTEGER NOT NULL,
-                            sRFCF_pAF VARCHAR NOT NULL,
+                            sRFCF_pAF INTEGER NOT NULL,
                             nMonto INTEGER NOT NULL,
                             CONSTRAINT dfecha_paf PRIMARY KEY (dFecha_pAF, PagnIdSucursal_pAF, sCuenta_pAF, OrgnIdSucursal_pAF, sRFCF_pAF)
             )
@@ -350,133 +356,133 @@
             )
 [QUERY    ] ALTER TABLE CMA ADD CONSTRAINT moral_cma_fk
             FOREIGN KEY (sRFC_CMA)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE emailMoral ADD CONSTRAINT moral_emoral_fk
             FOREIGN KEY (sRFC_eM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE CASCADE
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE telMoral ADD CONSTRAINT moral_tmoral_fk
             FOREIGN KEY (sRFC_tM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE CASCADE
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE CMP ADD CONSTRAINT moral_cmp_fk
             FOREIGN KEY (sRFC_CMP)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retPrestamoMor ADD CONSTRAINT moral_retprestamomor_fk
             FOREIGN KEY (sRFC_rPM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retAVM ADD CONSTRAINT moral_retavm_fk
             FOREIGN KEY (sRFC_rAVM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retAAM ADD CONSTRAINT moral_retaam_fk
             FOREIGN KEY (sRFC_rAAM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE pagAM ADD CONSTRAINT moral_pagam_fk
             FOREIGN KEY (sRFC_pAM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE pagPM ADD CONSTRAINT moral_pagpm_fk
             FOREIGN KEY (sRFC_pPM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE evalMoral ADD CONSTRAINT moral_evalmoral_fk
             FOREIGN KEY (sRFC_evM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE qMoral ADD CONSTRAINT moral_qmoral_fk
             FOREIGN KEY (sRFC_qM)
-            REFERENCES Moral (sRFCM)
+            REFERENCES Moral (nIdMoral)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE emailFisica ADD CONSTRAINT fisica_efisica_fk
             FOREIGN KEY (sRFC_eF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE CASCADE
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE telFisica ADD CONSTRAINT fisica_tfisica_fk
             FOREIGN KEY (sRFC_tF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE CASCADE
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE CFP ADD CONSTRAINT fisica_cfp_fk
             FOREIGN KEY (sRFC_CFP)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retPrestamoFis ADD CONSTRAINT fisica_retprestamofis_fk
             FOREIGN KEY (sRFC_rPF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE pagPF ADD CONSTRAINT fisica_pagaf_fk1
             FOREIGN KEY (sRFC_pPF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE evalFisica ADD CONSTRAINT fisica_evalfisica_fk
             FOREIGN KEY (sRFC_evF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE qFisica ADD CONSTRAINT fisica_qfisica_fk
             FOREIGN KEY (sRFC_qF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE CFA ADD CONSTRAINT fisica_cfa_fk
             FOREIGN KEY (sRFCF_CFA)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE pagAF ADD CONSTRAINT fisica_pagaf_fk
             FOREIGN KEY (sRFCF_pAF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retAAF ADD CONSTRAINT fisica_retaaf_fk
             FOREIGN KEY (sRFCF_rAAF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
 [QUERY    ] ALTER TABLE retAVF ADD CONSTRAINT fisica_retavf_fk
             FOREIGN KEY (sRFCF_rAVF)
-            REFERENCES Fisica (sRFCF)
+            REFERENCES Fisica (nIdFisica)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
             NOT DEFERRABLE
