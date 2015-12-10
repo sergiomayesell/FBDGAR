@@ -3,14 +3,18 @@
                             sTipo VARCHAR NOT NULL,
                             nDependiente INTEGER DEFAULT 0 NOT NULL,
                             sWeb VARCHAR NOT NULL,
-                            sDireccion VARCHAR NOT NULL,
                             sNombre VARCHAR NOT NULL,
-                            sZona VARCHAR NOT NULL,
+                            sDireccion VARCHAR NOT NULL,
+                            nExt INTEGER NOT NULL,
+                            nInt INTEGER NOT NULL,
+                            sColonia VARCHAR NOT NULL,
+                            sDelgacion VARCHAR NOT NULL,
+                            nCP INTEGER NOT NULL,
+                            sEstado VARCHAR NOT NULL,
                             sRegion VARCHAR NOT NULL,
+                            sZona VARCHAR NOT NULL,
                             CONSTRAINT srfcm PRIMARY KEY (sRFCM)
             )
-[QUERY    ] COMMENT ON COLUMN Moral.sDireccion IS 'Corresponde a:
-            Call + Ext + Int + CP + Del/Mun + Estado'
 [QUERY    ] CREATE TABLE telMoral (
                             sTelefono_tM VARCHAR NOT NULL,
                             sRFC_tM VARCHAR NOT NULL,
@@ -34,13 +38,17 @@
                             sJob VARCHAR NOT NULL,
                             sEscolaridad VARCHAR NOT NULL,
                             nDependientes INTEGER DEFAULT 0 NOT NULL,
-                            sZona VARCHAR NOT NULL,
-                            sRegion VARCHAR NOT NULL,
                             sDireccion VARCHAR NOT NULL,
+                            nExt INTEGER NOT NULL,
+                            nInt INTEGER,
+                            sColonia VARCHAR NOT NULL,
+                            sDelgacion VARCHAR NOT NULL,
+                            nCP INTEGER NOT NULL,
+                            sEstado VARCHAR NOT NULL,
+                            sRegion VARCHAR NOT NULL,
+                            sZona VARCHAR NOT NULL,
                             CONSTRAINT srfcf PRIMARY KEY (sRFCF)
             )
-[QUERY    ] COMMENT ON COLUMN Fisica.sDireccion IS 'Corresponde a :
-            Call + Ext + Int + CP + Del/Mun + Estado'
 [QUERY    ] CREATE TABLE telFisica (
                             sTelefonoF VARCHAR NOT NULL,
                             sRFC_tF VARCHAR NOT NULL,
@@ -57,16 +65,20 @@
                             nMetros INTEGER NOT NULL,
                             nTipo INTEGER NOT NULL,
                             sNombre VARCHAR NOT NULL,
-                            sZona VARCHAR NOT NULL,
-                            sRegion VARCHAR NOT NULL,
                             sDireccion VARCHAR NOT NULL,
+                            nExt INTEGER NOT NULL,
+                            nInt INTEGER NOT NULL,
+                            sColonia VARCHAR NOT NULL,
+                            sDelegacion VARCHAR NOT NULL,
+                            nCP INTEGER NOT NULL,
+                            sEstado VARCHAR NOT NULL,
+                            sRegion VARCHAR NOT NULL,
+                            sZona VARCHAR NOT NULL,
                             CONSTRAINT nidsucursal PRIMARY KEY (nIdSucursal)
             )
 [QUERY    ] COMMENT ON COLUMN Sucursal.nTipo IS '1: Sucursal
             2: Sucursal dentro de otro establecimiento
             3: Banca en linea'
-[QUERY    ] COMMENT ON COLUMN Sucursal.sDireccion IS 'Corresponde a :
-            Call + Ext + Int + CP + Del/Mun + Estado'
 [QUERY    ] ALTER SEQUENCE sucursal_nidsucursal_seq OWNED BY Sucursal.nIdSucursal
 [QUERY    ] CREATE SEQUENCE qmoral_nidqueja_qm_seq
 [QUERY    ] CREATE TABLE qMoral (
@@ -305,14 +317,18 @@
                             sNombre VARCHAR NOT NULL,
                             sAPaterno VARCHAR NOT NULL,
                             sAMaterno VARCHAR NOT NULL,
+                            sTipo VARCHAR NOT NULL,
+                            sDireccion VARCHAR NOT NULL,
+                            nExt INTEGER NOT NULL,
+                            nInt INTEGER NOT NULL,
+                            sColonia VARCHAR NOT NULL,
+                            sDelegacion VARCHAR NOT NULL,
+                            nCP INTEGER NOT NULL,
+                            sEstado VARCHAR NOT NULL,
                             sRegion VARCHAR NOT NULL,
                             sZona VARCHAR NOT NULL,
-                            sTipo VARCHAR NOT NULL,
-                            SDireccion VARCHAR NOT NULL,
                             CONSTRAINT srfc_e PRIMARY KEY (sRFC_E, nIdSucursal_E)
             )
-[QUERY    ] COMMENT ON COLUMN Empleado.SDireccion IS 'Corresponde a :
-            Call + Ext + Int + CP + Del/Mun + Estado'
 [QUERY    ] CREATE TABLE EV_Asignado (
                             dFecha_A DATE NOT NULL,
                             sRFC_A VARCHAR NOT NULL,
