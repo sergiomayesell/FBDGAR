@@ -1,0 +1,5 @@
+puedes compilar desde consola con:
+$ant jar
+despues ir a la carpeta dis donde encontraras Btras.jar el cual es la aplicacion.
+
+O puedes cargar el proyecto en NetBeans y probar individualmente las clases.
