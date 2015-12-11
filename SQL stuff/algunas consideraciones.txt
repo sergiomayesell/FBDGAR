@@ -1,0 +1,47 @@
+Para estandarizar los datos que insertemos a la base de datos, junto con lo que se va a insertar a travez de la aplicacion por favor consideren lo siguiente al hacer los scripts de poblado.
+
+
+Los rfc y curp no necesariamente tienen que coincidir con el nombre y fecha etc.Si da tiempo se hara un script de validacion.
+
+Para las fechas de retiros y pagos obtener la fecha y hora del sistema(osea un proceso almacenado)
+
+Para el RFC:
+13 caracteres para personas fisicas
+12 caracteres para personas morales
+
+El curp son 18 carcateres 
+
+Para las regiones son(debera haber un proceso almacenado mas adelante que especifique el correcto de acuerdo al estado):
+1, 2, 3, ... , 6
+
+Para las zonas son:
+Occidental, Oriental, Centro
+
+Tipos de tarjeta:
+Oro, Platino, Empresarial
+
+Para las evaluaciones:
+ - Atencion de sucursal: mala, regular, buena, excelente
+ - Claridad de la informacion: confusa, poco clara, clara, excelente
+ - Tiempo transcurrido: muy lento, lento, aficiente, muy rapido
+ - Forma de pago preferida: ATM, sucursal, banca electronica
+
+Para las quejas:
+ - Producto o servico reportado: otorgamiento de prestamos, quejas, apertura de cuentas, retiros, depositos 
+
+Para el tipo de prestamo:
+financiamiento, inversion, familiar
+
+Via de notificacion:
+television, radio, internet, espectaculares, folletos, sucursal
+
+Para el tipo de sucursal(ver comentario en tabla):
+1, 2, 3
+
+Para las tarjetas de credito y debito usar cadenas de numeros de 16 digitos que empiezen con el numero 4, ver la imagen adjunta. Nuestro banco solo emite VISA.
+
+Para los numeros de cuenta usar minimo 16 digitos, maximo 20 sin guiones, ni comas ni nada, solo digitos
+
+
+Para los estados de las ventanillas/atm:
+en servicio, fuera de servicio
