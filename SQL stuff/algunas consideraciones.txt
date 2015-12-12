@@ -23,7 +23,7 @@ Oro, Platino, Empresarial
 Para las evaluaciones:
  - Atencion de sucursal: mala, regular, buena, excelente
  - Claridad de la informacion: confusa, poco clara, clara, excelente
- - Tiempo transcurrido: muy lento, lento, aficiente, muy rapido
+ - Tiempo transcurrido: muy lento, lento, eficiente, muy rapido
  - Forma de pago preferida: ATM, sucursal, banca electronica
 
 Para las quejas:
@@ -48,4 +48,8 @@ en servicio, fuera de servicio
 
 Tipo cliente
 innovador,preferente,premier,selecto
+
+—Agregado por Antonio—
+
+Las fechas son de la forma 03/25/2012
 
