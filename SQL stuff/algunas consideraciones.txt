@@ -45,3 +45,7 @@ Para los numeros de cuenta usar minimo 16 digitos, maximo 20 sin guiones, ni com
 
 Para los estados de las ventanillas/atm:
 en servicio, fuera de servicio
+
+Tipo cliente
+innovador,preferente,premier,selecto
+
