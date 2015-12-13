@@ -8,7 +8,7 @@ CREATE SCHEMA public
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO public;
 COMMENT ON SCHEMA public
-  IS 'Esquema de la base de datos del Banco Trasatlantico. Fisicas y Moral se refieren a los clientes personas y empresas respectivamente. Prestamos se refiere a los creditos otorgados, los cuales no son diferentes de una tarjeta de credito.';
+  IS 'Esquema de la base de datos del Banco Trasatlantico. Fisicas y Moral se refieren a los clientes personas y empresas respectivamente. Prestamos se refiere a los creditos otorgados, los cuales son diferentes de una tarjeta de credito.';
 
 
 CREATE SEQUENCE moral_nidcliente_m_seq;

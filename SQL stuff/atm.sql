@@ -1,4 +1,5 @@
-﻿INSERT INTO atm (nidsucursal_atm,sestado) VALUES (289,'en servicio');
+﻿-- ATM en sucursales
+INSERT INTO atm (nidsucursal_atm,sestado) VALUES (289,'en servicio');
 INSERT INTO atm (nidsucursal_atm,sestado) VALUES (226,'en servicio');
 INSERT INTO atm (nidsucursal_atm,sestado) VALUES (81,'en servicio');
 INSERT INTO atm (nidsucursal_atm,sestado) VALUES (209,'en servicio');
