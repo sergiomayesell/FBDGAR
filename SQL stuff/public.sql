@@ -137,7 +137,7 @@ CREATE TABLE qMoral (
                 nIdSucursal_qM INTEGER NOT NULL,
                 nIdCliente_qM INTEGER NOT NULL,
                 dFecha DATE NOT NULL,
-                sService VARCHAR NOT NULL,
+                sservicio VARCHAR NOT NULL,
                 sAsunto VARCHAR NOT NULL,
                 sDesc VARCHAR NOT NULL,
                 CONSTRAINT nidqueja_qm PRIMARY KEY (nIdQueja_qM, nIdSucursal_qM, nIdCliente_qM)
@@ -217,7 +217,7 @@ Debido a la relacion uno a muchos, obtiene fecha la relacion';
 
 
 CREATE TABLE pagPM (
-                tFecha_pPM TIMESTAMP NOT NULL,
+                tFecha_pPM TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_pPM VARCHAR NOT NULL,
                 nIdCliente_pPM INTEGER NOT NULL,
                 OrnIdSucursal_pPM INTEGER NOT NULL,
@@ -229,7 +229,7 @@ COMMENT ON TABLE pagPM IS 'Pagos/Abonos a cuentas de prestamo(Empresas)';
 
 
 CREATE TABLE CFP (
-                sCuentaFP VARCHAR NOT NULL,
+                sCuenta_CFP VARCHAR NOT NULL,
                 nIdCliente_CFP INTEGER NOT NULL,
                 nIdSucursal_CFP INTEGER NOT NULL,
                 nMonto INTEGER NOT NULL,
@@ -245,7 +245,7 @@ Debido a la relacion uno a muchos, obtiene fecha la relacion';
 
 
 CREATE TABLE pagPF (
-                tFecha_pPF TIMESTAMP NOT NULL,
+                tFecha_pPF TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_pPF VARCHAR NOT NULL,
                 nIdCliente_pPF INTEGER NOT NULL,
                 OrnIdSucursal_pPF INTEGER NOT NULL,
@@ -283,7 +283,7 @@ COMMENT ON TABLE Ventanilla IS 'Venanillas';
 ALTER SEQUENCE ventanilla_nidventanilla_seq OWNED BY Ventanilla.nIdVentanilla;
 
 CREATE TABLE retPrestamoFis (
-                tFecha_rPF TIMESTAMP NOT NULL,
+                tFecha_rPF TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_rPF VARCHAR NOT NULL,
                 nIdCliente_rPF INTEGER NOT NULL,
                 OrnIdSucursal_rPF INTEGER NOT NULL,
@@ -296,7 +296,7 @@ COMMENT ON TABLE retPrestamoFis IS 'Retiros de cuenta de prestamo(Personas), est
 
 
 CREATE TABLE retPrestamoMor (
-                tFecha_rPM TIMESTAMP NOT NULL,
+                tFecha_rPM TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_rPM VARCHAR NOT NULL,
                 nIdCliente_rPM INTEGER NOT NULL,
                 OrnIdSucursal_rPM INTEGER NOT NULL,
@@ -344,7 +344,7 @@ COMMENT ON TABLE tar_TDM IS 'Tarjetas de debito, asociadas a cuentas de ahorro d
 
 
 CREATE TABLE pagAM (
-                tFecha_pAM TIMESTAMP NOT NULL,
+                tFecha_pAM TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_pAM VARCHAR NOT NULL,
                 nIdCliente_pAM INTEGER NOT NULL,
                 OrnIdSucursal_pAM INTEGER NOT NULL,
@@ -356,7 +356,7 @@ COMMENT ON TABLE pagAM IS 'Pagos/Abonos a cuentas de ahorro de empresas';
 
 
 CREATE TABLE retAAM (
-                tFecha_rAAM TIMESTAMP NOT NULL,
+                tFecha_rAAM TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_rAAM VARCHAR NOT NULL,
                 nIdCliente_rAAM INTEGER NOT NULL,
                 OrnIdSucursal_rAAM INTEGER NOT NULL,
@@ -369,7 +369,7 @@ COMMENT ON TABLE retAAM IS 'Retiros de cuentas de ahorro por ATM(Empresas)';
 
 
 CREATE TABLE retAVM (
-                tFecha_rAVM TIMESTAMP NOT NULL,
+                tFecha_rAVM TIMESTAMP DEFAULT now() NOT NULL,
                 sCuenta_rAVM VARCHAR NOT NULL,
                 nIdCliente_rAVM INTEGER NOT NULL,
                 OrnIdSucursal_rAVM INTEGER NOT NULL,
@@ -417,7 +417,7 @@ COMMENT ON TABLE tar_TDF IS 'Tarjetas de debito asociadas a cuantas de ahorro de
 
 
 CREATE TABLE retAVF (
-                tFecha_rAVF TIMESTAMP NOT NULL,
+                tFecha_rAVF TIMESTAMP DEFAULT now() NOT NULL,
                 nIdVentanilla_rAVF INTEGER NOT NULL,
                 RetnIdSucursal_rAVF INTEGER NOT NULL,
                 sCuenta_rAVF VARCHAR NOT NULL,
@@ -430,7 +430,7 @@ COMMENT ON TABLE retAVF IS 'Retiros realizados por ventanilla de cuentas de ahor
 
 
 CREATE TABLE retAAF (
-                tFecha_rAAF TIMESTAMP NOT NULL,
+                tFecha_rAAF TIMESTAMP DEFAULT now() NOT NULL,
                 nIdATM_rAAF INTEGER NOT NULL,
                 RetnIdSucursal_rAAF INTEGER NOT NULL,
                 sCuenta_rAAF VARCHAR NOT NULL,
@@ -443,7 +443,7 @@ COMMENT ON TABLE retAAF IS 'Retiros de cuentas de ahorro por ATM(Personas)';
 
 
 CREATE TABLE pagAF (
-                tFecha_pAF TIMESTAMP NOT NULL,
+                tFecha_pAF TIMESTAMP DEFAULT now() NOT NULL,
                 PagnIdSucursal_pAF INTEGER NOT NULL,
                 sCuenta_pAF VARCHAR NOT NULL,
                 OrgnIdSucursal_pAF INTEGER NOT NULL,
