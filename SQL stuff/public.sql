@@ -21,7 +21,7 @@ CREATE TABLE Moral (
                 sNombre VARCHAR NOT NULL,
                 sDireccion VARCHAR NOT NULL,
                 nExt INTEGER NOT NULL,
-                nInt INTEGER NOT NULL,
+                nInt INTEGER,
                 sColonia VARCHAR NOT NULL,
                 sDelegacion VARCHAR NOT NULL,
                 sCP VARCHAR NOT NULL,
@@ -938,6 +938,10 @@ ALTER TABLE Moral ADD CONSTRAINT  unq_moral_rfc UNIQUE(srfc);
 
 ALTER TABLE Empleado ADD CONSTRAINT  unq_empleado_rfc UNIQUE(srfc_e);
 
+ALTER TABLE cred_tcf ADD CONSTRAINT  unq_starjeta_ctcf UNIQUE(starjeta_tcf);
+ALTER TABLE cred_tcm ADD CONSTRAINT  unq_starjeta_ctcm UNIQUE(starjeta_tcm);
+ALTER TABLE cred_tcf ADD CONSTRAINT  unq_starjeta_ttcf UNIQUE(starjeta_tcf);
+ALTER TABLE cred_tcm ADD CONSTRAINT  unq_starjeta_ttcm UNIQUE(starjeta_tcm);
 
 
 
