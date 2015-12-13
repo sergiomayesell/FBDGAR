@@ -52,4 +52,8 @@ innovador,preferente,premier,selecto
 —Agregado por Antonio—
 
 Las fechas son de la forma 03/25/2012
+<<<<<<< HEAD
 Los nuemeros telefónicos son canadienses
+=======
+
+>>>>>>> Oscaiito

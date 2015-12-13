@@ -1,4 +1,4 @@
- INSERT INTO cfa (scuenta_cfa,nidsucursal_cfa,nidcliente_cfa,dfecha,nsaldo) VALUES ('4844297975596549',1189,223,'04/21/2015',60);
+INSERT INTO cfa (scuenta_cfa,nidsucursal_cfa,nidcliente_cfa,dfecha,nsaldo) VALUES ('4844297975596549',1189,223,'04/21/2015',60);
 INSERT INTO cfa (scuenta_cfa,nidsucursal_cfa,nidcliente_cfa,dfecha,nsaldo) VALUES ('4026887908730783',714,289,'08/28/2015',46392);
 INSERT INTO cfa (scuenta_cfa,nidsucursal_cfa,nidcliente_cfa,dfecha,nsaldo) VALUES ('4175001450895080',1078,95,'03/14/2016',5163);
 INSERT INTO cfa (scuenta_cfa,nidsucursal_cfa,nidcliente_cfa,dfecha,nsaldo) VALUES ('4026026312767335',886,297,'08/15/2016',15799);
