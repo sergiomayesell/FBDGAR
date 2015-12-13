@@ -1,4 +1,4 @@
---Retiros realizados por ventanilla de cuentas de ahorro de personas
+--Retiros realizados por ventanilla de cuentas de ahorro de personas fisicas
 INSERT INTO retAVF (tFecha_rAVF,sCuenta_rAVF,nIdCliente_rAVF,nIdSucursal_rAVF,nIdVentanilla_rAVF,RetnIdSucursal_rAVF,dMonto) VALUES ('2012/06/11',4844297975596549,223,1189,201,173,636);
 INSERT INTO retAVF (tFecha_rAVF,sCuenta_rAVF,nIdCliente_rAVF,nIdSucursal_rAVF,nIdVentanilla_rAVF,RetnIdSucursal_rAVF,dMonto) VALUES ('2014/01/07',4026887908730783,289,714,202,255,376);
 INSERT INTO retAVF (tFecha_rAVF,sCuenta_rAVF,nIdCliente_rAVF,nIdSucursal_rAVF,nIdVentanilla_rAVF,RetnIdSucursal_rAVF,dMonto) VALUES ('2012/08/28',4175001450895080,95,1078,203,148,127);
