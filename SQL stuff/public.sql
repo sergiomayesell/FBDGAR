@@ -93,9 +93,9 @@ COMMENT ON TABLE telFisica IS 'Telefonos de los clientes (personas)';
 
 
 CREATE TABLE emailFisica (
-                sEmailF VARCHAR NOT NULL,
+                sEmail_EF VARCHAR NOT NULL,
                 nIdCliente_eF INTEGER NOT NULL,
-                CONSTRAINT semailf PRIMARY KEY (sEmailF, nIdCliente_eF)
+                CONSTRAINT sEmail_EF PRIMARY KEY (sEmail_EF, nIdCliente_eF)
 );
 COMMENT ON TABLE emailFisica IS 'Correos electronicos de los clientes(personas)';
 
@@ -423,7 +423,7 @@ CREATE TABLE retAVF (
                 sCuenta_rAVF VARCHAR NOT NULL,
                 nIdSucursal_rAVF INTEGER NOT NULL,
                 nIdCliente_rAVF INTEGER NOT NULL,
-                dMonto INTEGER NOT NULL,
+                nmonto INTEGER NOT NULL,
                 CONSTRAINT tfecha_ravf PRIMARY KEY (tFecha_rAVF, nIdVentanilla_rAVF, RetnIdSucursal_rAVF, sCuenta_rAVF, nIdSucursal_rAVF, nIdCliente_rAVF)
 );
 COMMENT ON TABLE retAVF IS 'Retiros realizados por ventanilla de cuentas de ahorro de personas';
@@ -479,9 +479,9 @@ COMMENT ON TABLE Empleado IS 'Datos personales de los empleados. Como con quien 
 CREATE TABLE EV_Asignado (
                 dFecha_A DATE NOT NULL,
                 sRFC_A VARCHAR NOT NULL,
-                nIdSucursal__A INTEGER NOT NULL,
+                nidsucursal_a INTEGER NOT NULL,
                 nIdVentanilla_A INTEGER NOT NULL,
-                CONSTRAINT dfecha_a PRIMARY KEY (dFecha_A, sRFC_A, nIdSucursal__A, nIdVentanilla_A)
+                CONSTRAINT dfecha_a PRIMARY KEY (dFecha_A, sRFC_A, nidsucursal_a, nIdVentanilla_A)
 );
 COMMENT ON TABLE EV_Asignado IS 'Asignacion de empleados a ventanillas';
 
@@ -834,7 +834,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE EV_Asignado ADD CONSTRAINT ventanilla_ev_asignado_fk
-FOREIGN KEY (nIdVentanilla_A, nIdSucursal__A)
+FOREIGN KEY (nIdVentanilla_A, nidsucursal_a)
 REFERENCES Ventanilla (nIdVentanilla, nIdSucursal_V)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
@@ -925,7 +925,7 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE EV_Asignado ADD CONSTRAINT empleado_ev_asignado_fk
-FOREIGN KEY (sRFC_A, nIdSucursal__A)
+FOREIGN KEY (sRFC_A, nidsucursal_a)
 REFERENCES Empleado (sRFC_E, nIdSucursal_E)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION

@@ -1,5 +1,5 @@
---Quejas de personas fisicas
- INSERT INTO qFisica (nIdSucursal_qF,nIdCliente_qF,dFecha,sServicio,sAsunto,sDesc) VALUES (264,465,'11/04/2015','quejas','quis diam luctus lobortis. Class aptent','tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum');
+﻿--Quejas de personas fisicas
+INSERT INTO qFisica (nIdSucursal_qF,nIdCliente_qF,dFecha,sServicio,sAsunto,sDesc) VALUES (264,465,'11/04/2015','quejas','quis diam luctus lobortis. Class aptent','tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum');
 INSERT INTO qFisica (nIdSucursal_qF,nIdCliente_qF,dFecha,sServicio,sAsunto,sDesc) VALUES (255,348,'08/09/2016','depositos','In ornare sagittis felis. Donec','ante ipsum primis in faucibus orci luctus et ultrices posuere');
 INSERT INTO qFisica (nIdSucursal_qF,nIdCliente_qF,dFecha,sServicio,sAsunto,sDesc) VALUES (275,437,'08/30/2015','depositos','Mauris magna. Duis dignissim tempor arcu.','feugiat. Sed nec metus facilisis lorem tristique aliquet. Phasellus fermentum');
 INSERT INTO qFisica (nIdSucursal_qF,nIdCliente_qF,dFecha,sServicio,sAsunto,sDesc) VALUES (90,197,'05/23/2016','depositos','purus. Nullam scelerisque neque sed sem egestas','tellus faucibus leo, in lobortis tellus justo sit amet nulla.');
