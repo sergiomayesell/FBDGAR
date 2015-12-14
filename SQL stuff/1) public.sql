@@ -238,7 +238,7 @@ CREATE TABLE CFP (
                 nAbonado INTEGER DEFAULT 0 NOT NULL,
                 sVia VARCHAR NOT NULL,
                 dFecha DATE NOT NULL,
-                CONSTRAINT scuentafp PRIMARY KEY (sCuentaFP, nIdCliente_CFP, nIdSucursal_CFP)
+                CONSTRAINT scuenta_cfp PRIMARY KEY (scuenta_cfp, nIdCliente_CFP, nIdSucursal_CFP)
 );
 COMMENT ON TABLE CFP IS 'Cuantas de prestamo de personas fisicas.
 Debido a la relacion uno a muchos, obtiene fecha la relacion';
@@ -779,14 +779,14 @@ NOT DEFERRABLE;
 
 ALTER TABLE retPrestamoFis ADD CONSTRAINT cfp_retprestamofis_fk
 FOREIGN KEY (sCuenta_rPF, nIdCliente_rPF, OrnIdSucursal_rPF)
-REFERENCES CFP (sCuentaFP, nIdCliente_CFP, nIdSucursal_CFP)
+REFERENCES CFP (scuenta_cfp, nIdCliente_CFP, nIdSucursal_CFP)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE pagPF ADD CONSTRAINT cfp_pagaf_fk
 FOREIGN KEY (sCuenta_pPF, nIdCliente_pPF, OrnIdSucursal_pPF)
-REFERENCES CFP (sCuentaFP, nIdCliente_CFP, nIdSucursal_CFP)
+REFERENCES CFP (scuenta_cfp, nIdCliente_CFP, nIdSucursal_CFP)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -930,6 +930,7 @@ REFERENCES Empleado (sRFC_E, nIdSucursal_E)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+ALTER TABLE EV_Asignado DROP CONSTRAINT empleado_ev_asignado_fk; --Generate trouble on ev_asigna
 --Constraints no generadas por power architect
 ALTER TABLE Fisica ADD CONSTRAINT  unq_fisica_rfc UNIQUE(srfc);
 ALTER TABLE Fisica ADD CONSTRAINT  unq_fisica_curp UNIQUE(scurp);

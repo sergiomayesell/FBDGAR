@@ -1,4 +1,6 @@
-﻿-- Verifica que el prestamo sea del rango aceptable y corresponda con el tipo.
+﻿-- Function: prestamo_ok()
+-- DROP FUNCTION ;
+-- Verifica que el prestamo sea del rango aceptable y corresponda con el tipo.
 -- Usada por los triggers bfr_ins_cfp y bfr_ins_cmp
 create or replace function prestamo_ok() returns Trigger as $prestamo$
 declare
@@ -23,6 +25,7 @@ if(NEW.nmonto >= 50000 and NEW.nmonto <= 500000) then
  return null;
  end if;
 end if;
+NEW.dfecha := now(); -- no cheating
 NEW.stipo := lower(NEW.stipo);
 NEW.svia := lower(NEW.svia);
 return NEW;
@@ -77,6 +80,7 @@ if(NEW.napertura < 6000) then
  return null;
 end if;
 NEW.nsaldo := NEW.napertura;
+NEW.dfecha := now(); --no cheating
 return NEW;
 end;
 $mmm$  language plpgsql;
@@ -96,6 +100,7 @@ if(NEW.napertura < 3000) then
  return null;
 end if;
 NEW.nsaldo := NEW.napertura;
+NEW.dfecha := now(); --no cheating
 return NEW;
 end;
 $mmf$  language plpgsql;
@@ -216,13 +221,15 @@ for each row execute procedure dtcm_avalible();
 -- Verifica que la ventanilla pertenesca a la mismca sucursal del empleado
 -- Verifica que el tipo del empleado sea ventanilla
 create or replace function samePlace() returns Trigger as $okv$
-declare
+declare 
 begin
 if(NEW.nidsucursal_a NOT IN (SELECT nidsucursal_v FROM ventanilla WHERE nidventanilla = NEW.nidventanilla_a)) then
+ raise notice 'sucursal no corresponde';
  return null;
 end if;
-if('ventanilla' NOT IN (SELECT stipo FROM empleado WHERE srfc_e = lower(NEW.srfc_a))) then 
- return null;
+if('ventanilla' NOT LIKE (SELECT stipo FROM empleado WHERE lower(srfc_e) LIKE lower(NEW.srfc_a))) then
+ raise notice 'es ejecutivo';
+ return NULL;
 end if;
 NEW.srfc_a := lower(NEW.srfc_a);
 return NEW;
@@ -238,200 +245,201 @@ for each row execute procedure samePlace();
 -- Asigna la region y zona de acuerdo al estado (esta funcion modifica el valor de region y zona si es que se paso como argumento de la insercion).
 create or replace function zonifica() returns Trigger as $zone$
 declare
-begin	
-if('aguascalientes' = lower(NEW.sestado)) then
+begin
+NEW.sestado := trim(NEW.sestado);	
+if('aguascalientes' like lower(NEW.sestado)) then
 	NEW.sestado := 'aguascalientes';
 	NEW.nregion := 2;
 	NEW.szona := 'occidental';
 	return NEW;
 end if;
-if('Baja California Norte norte' like lower(NEW.sestado)) then
-	NEW.sestado := 'Baja California Norte norte';
+if('baja california norte' like lower(NEW.sestado)) then
+	NEW.sestado := 'baja california norte';
 	NEW.nregion := 1;
 	NEW.szona := 'occidental';
 	return NEW;
 end if;
-if('Baja California Norte sur' like lower(NEW.sestado)) then
-	NEW.sestado := 'Baja California Norte sur';
+if('baja california norte sur' like lower(NEW.sestado)) then
+	NEW.sestado := 'baja california norte sur';
 	NEW.nregion := 1;
 	NEW.szona := 'occidental';
 	return NEW;
 end if;
-if( 'campeche' = lower(NEW.sestado)) then
+if( 'campeche' like lower(NEW.sestado)) then
 	NEW.sestado := 'campeche';
 	NEW.nregion := 6;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'coahuila' = lower(NEW.sestado)) then
+if( 'coahuila' like lower(NEW.sestado)) then
 	NEW.sestado := 'coahuila';
 	NEW.nregion := 3;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'colima' = lower(NEW.sestado)) then
+if( 'colima' like lower(NEW.sestado)) then
 	NEW.sestado := 'colima';	
 	New.nregion := 2;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'chiapas' = lower(NEW.sestado)) then
+if( 'chiapas' like lower(NEW.sestado)) then
 	NEW.sestado := 'chiapas';	
 	NEW.nregion := 5;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'chihuahua' = lower(NEW.sestado)) then
+if( 'chihuahua' like lower(NEW.sestado)) then
 	NEW.sestado := 'chihuahua';
 	New.nregion := 1;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'distrito federal' = lower(NEW.sestado)) then
+if( 'distrito federal' like lower(NEW.sestado)) then
 	NEW.sestado := 'distrito federal';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'durango' = lower(NEW.sestado)) then
+if( 'durango' like lower(NEW.sestado)) then
 	NEW.sestado := 'durango';
 	New.nregion := 1;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'guanajuato' = lower(NEW.sestado)) then
+if( 'guanajuato' like lower(NEW.sestado)) then
 	NEW.sestado := 'guanajuato';	
 	New.nregion := 2;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'guerrero' = lower(NEW.sestado)) then
+if( 'guerrero' like lower(NEW.sestado)) then
 	NEW.sestado := 'guerrero';	
 	NEW.nregion := 5;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'hidalgo' = lower(NEW.sestado)) then
+if( 'hidalgo' like lower(NEW.sestado)) then
 	NEW.sestado := 'hidalgo';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'jalisco' = lower(NEW.sestado)) then
+if( 'jalisco' like lower(NEW.sestado)) then
 	NEW.sestado := 'jalisco';	
 	New.nregion := 2;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'estado de mexico' = lower(NEW.sestado)) then
+if( 'estado de mexico' like lower(NEW.sestado)) then
 	NEW.sestado := 'estado de mexico';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'michoacan' = lower(NEW.sestado)) then
+if( 'michoacan' like lower(NEW.sestado)) then
 	NEW.sestado := 'michoacan';	
 	New.nregion := 2;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'morelos' = lower(NEW.sestado)) then
+if( 'morelos' like lower(NEW.sestado)) then
 	NEW.sestado := 'morelos';	
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'nayarit' = lower(NEW.sestado)) then
+if( 'nayarit' like lower(NEW.sestado)) then
 	NEW.sestado := 'nayarit';	
 	NEW.nregion := 2;
 	NEW.szona = 'occidental';	
 	return NEW;
 end if;
-if( 'nuevo leon' = lower(NEW.sestado)) then
+if( 'nuevo leon' like lower(NEW.sestado)) then
 	NEW.sestado := 'nuevo leon';
 	NEW.nregion := 3;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'oaxaca' = lower(NEW.sestado)) then
+if( 'oaxaca' like lower(NEW.sestado)) then
 	NEW.sestado := 'oaxaca';	
 	NEW.nregion := 5;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'puebla' = lower(NEW.sestado)) then
+if( 'puebla' like lower(NEW.sestado)) then
 	NEW.sestado := 'puebla';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'queretaro' = lower(NEW.sestado)) then
+if( 'queretaro' like lower(NEW.sestado)) then
 	NEW.sestado := 'queretaro';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'quintana roo' = lower(NEW.sestado)) then
+if( 'quintana roo' like lower(NEW.sestado)) then
 	NEW.sestado := 'quintana roo';
 	NEW.nregion := 6;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'san luis potosí' = lower(NEW.sestado)) then
+if( 'san luis potosi' like lower(NEW.sestado)) then
 	NEW.sestado := 'san luis potosi';
 	NEW.nregion := 3;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'sinaloa' = lower(NEW.sestado)) then
+if( 'sinaloa' like lower(NEW.sestado)) then
 	NEW.sestado := 'sinaloa';
 	New.nregion := 1;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'sonora' = lower(NEW.sestado)) then
+if( 'sonora' like lower(NEW.sestado)) then
 	NEW.sestado := 'sonora';
 	New.nregion := 1;
 	NEW.szona = 'occidental';
 	return NEW;
 end if;
-if( 'tabasco' = lower(NEW.sestado)) then
+if( 'tabasco' like lower(NEW.sestado)) then
 	NEW.sestado := 'tabasco';
 	NEW.nregion := 6;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'tamaulipas' = lower(NEW.sestado)) then
+if( 'tamaulipas' like lower(NEW.sestado)) then
 	NEW.sestado := 'tamaulipas';
 	NEW.nregion := 3;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'tlaxcala' = lower(NEW.sestado)) then
+if( 'tlaxcala' like lower(NEW.sestado)) then
 	NEW.sestado := 'tlaxcala';
 	NEW.nregion := 4;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-if( 'veracruz' = lower(NEW.sestado)) then
+if( 'veracruz' like lower(NEW.sestado)) then
 	NEW.sestado := 'veracruz';
 	NEW.nregion := 6;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'yucatan' = lower(NEW.sestado)) then
+if( 'yucatan' like lower(NEW.sestado)) then
 	NEW.sestado := 'yucatan';
 	NEW.nregion := 6;
 	NEW.szona = 'centro';
 	return NEW;
 end if;
-if( 'zacatecas' = lower(NEW.sestado)) then
+if( 'zacatecas' like lower(NEW.sestado)) then
 	NEW.sestado := 'zacatecas';
 	NEW.nregion := 3;
 	NEW.szona = 'oriental';
 	return NEW;
 end if;
-raise notice NEW.sestado || ' no es un estado valido.';
+raise notice '%',NEW.sestado || ' no es un estado valido.';
 return null;
 end;
 $zone$  language plpgsql;
@@ -623,3 +631,231 @@ $more$  language plpgsql;
 drop trigger exe_pagam on pagam;
 create Trigger exe_pagam after insert on pagam
 for each row execute procedure more_cma();
+
+-------------------------------------------------------------------------------------
+-- Funcion para trigger de insercion en retprestamofis
+create or replace function cash_cfp() returns trigger as $cash$
+declare
+retirado integer;
+otorgado integer;
+plazo integer;
+meses integer;
+begin
+if(NEW.nmonto < 0) then	
+	return NULL;
+end if;
+SELECT sum(nmonto) INTO retirado FROM retprestamofis WHERE scuenta_rpf = NEW.scuenta_rpf AND nidcliente_rpf = NEW.nidcliente_rpf AND ornidsucursal_rpf = NEW.ornidsucursal_rpf AND nmonto > 0; 
+SELECT nmonto INTO otorgado FROM cfp WHERE scuenta_cfp = NEW.scuenta_rpf AND nidcliente_cfp = NEW.nidcliente_rpf AND nidsucursal_cfp = NEW.ornidsucursal_rpf;
+if(retirado is null) then
+	if(NEW.nmonto > otorgado) then		
+		return null;
+	end if;
+else
+	if(NEW.nmonto > (otorgado - retirado)) then		
+		return null;
+	end if;
+end if;
+SELECT extract(month from age(now(), dfecha)) into meses FROM cfp WHERE scuenta_cfp = NEW.scuenta_rpf AND nidcliente_cfp = NEW.nidcliente_rpf AND nidsucursal_cfp = NEW.ornidsucursal_rpf;
+SELECT nplazo into plazo FROM cfp WHERE scuenta_cfp = NEW.scuenta_rpf AND nidcliente_cfp = NEW.nidcliente_rpf AND nidsucursal_cfp = NEW.ornidsucursal_rpf;
+if(meses > plazo) then
+return null;
+end if;
+return NEW;
+end;
+$cash$  language plpgsql;
+
+-- Trigger de actualizacion en cfa despues de insercion en retaaf
+drop trigger exe_retiro_cfp on retprestamofis;
+create Trigger exe_retiro_cfp before insert on retprestamofis
+for each row execute procedure cash_cfp();
+
+-------------------------------------------------------------------------------------
+-- Funcion para trigger de insercion en retprestamomor
+create or replace function cash_cmp() returns trigger as $cash$
+declare
+retirado integer;
+otorgado integer;
+plazo integer;
+meses integer;
+begin
+if(NEW.nmonto < 0) then	
+	return NULL;
+end if;
+SELECT sum(nmonto) INTO retirado FROM retprestamomor WHERE scuenta_rpm = NEW.scuenta_rpm AND nidcliente_rpm = NEW.nidcliente_rpm AND ornidsucursal_rpm = NEW.ornidsucursal_rpm AND nmonto > 0; 
+SELECT nmonto INTO otorgado FROM cmp WHERE scuenta_cmp = NEW.scuenta_rpm AND nidcliente_cmp = NEW.nidcliente_rpm AND nidsucursal_cmp = NEW.ornidsucursal_rpm;
+if(retirado is null) then
+	if(NEW.nmonto > otorgado) then		
+		return null;
+	end if;
+else
+	if(NEW.nmonto > (otorgado - retirado)) then		
+		return null;
+	end if;
+end if;
+SELECT extract(month from age(now(), dfecha)) into meses FROM cmp WHERE scuenta_cmp = NEW.scuenta_rpm AND nidcliente_cmp = NEW.nidcliente_rpm AND nidsucursal_cmp = NEW.ornidsucursal_rpm;
+SELECT nplazo into plazo FROM cmp WHERE scuenta_cmp = NEW.scuenta_rpm AND nidcliente_cmp = NEW.nidcliente_rpm AND nidsucursal_cmp = NEW.ornidsucursal_rpm;
+if(meses > plazo) then
+return null;
+end if;
+return NEW;
+end;
+$cash$  language plpgsql;
+
+-- Trigger de actualizacion en cfa despues de insercion en retaaf
+drop trigger exe_retiro_cmp on retprestamomor;
+create Trigger exe_retiro_cmp before insert on retprestamomor
+for each row execute procedure cash_cmp();
+
+
+
+-------------------------------------------------------------------------------------
+-- Funcion para trigger de insercion en pagos a cuentas de prestamos fisica
+create or replace function pay_cfp() returns trigger as $payed$
+declare
+ultimo date;
+fapertura date;
+abono integer;
+monto integer;
+pmin integer;
+interes integer;
+isOK integer;
+pago integer;
+today integer;
+trans integer;
+begin
+if(NEW.nmonto < 0) then
+return NEW;
+end if;
+SELECT max(tfecha_ppf) into ultimo FROM pagpf WHERE scuenta_ppf = NEW.scuenta_ppf AND nidcliente_ppf = NEW.nidcliente_ppf AND ornidsucursal_ppf = NEW.ornidsucursal_ppf;
+SELECT dfecha INTO fapertura FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+SELECT nplazo INTO pmin FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+SELECT nmonto INTO monto FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+SELECT nabonado INTO abono FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+if(ultimo is null)then
+	SELECT extract(month from age(fapertura, now())) INTO isOK;	
+else
+	SELECT extract(month from age(fapertura, now())) INTO today;
+	SELECT extract(month from age(fapertura, ultimo)) INTO pago;
+	isOK := today - pago;
+	if(isOK < 0) then -- wtf!!!!!!!
+		return null;
+	end if;		
+end if;
+interes := 0;
+if(isOK > 3) then -- u'r busted	
+	interes := monto * -15 / 100;	
+	INSERT INTO pagpf (scuenta_ppf, nidcliente_ppf, ornidsucursal_ppf, pagnidsucursal_ppf,nmonto) VALUES (NEW.scuenta_ppf, NEW.nidcliente_ppf, NEW.ornidsucursal_ppf, NEW.pagnidsucursal_ppf, interes);
+end if;
+pmin := monto / pmin;
+trans := monto - abono;
+if((NEW.nmonto + interes) > trans) then
+	NEW.nmonto := trans - intereses;
+	return NEW;	
+else
+	if((NEW.nmonto + interes) > pmin) then
+		UPDATE cfp SET nabonado = (nabonado + monto * 3 / 100) WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND ornidsucursal_cfp = NEW.ornidsucursal_ppf;	
+	end if;
+end if;	
+return NEW;
+end;
+$payed$  language plpgsql;
+
+-- Trigger de insercion en pagpf genera interese y todo
+drop trigger exe_pago_cfp on pagpf;
+create Trigger exe_pago_cfp before insert on pagpf
+for each row execute procedure pay_cfp();
+
+create or replace function upd_monto_cfp() returns trigger as $pagado$ 
+declare
+actual integer;
+monto integer;
+generado integer;
+begin
+SELECT nabonado INTO actual FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+SELECT nmonto INTO monto FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
+SELECT sum(nmonto) INTO generado FROM pagpf WHERE scuenta_ppf = NEW.scuenta_ppf AND nidcliente_ppf = NEW.nidcliente_ppf AND nidsucursal_ppf = NEW.ornidsucursal_ppf;	
+if(generado >= actual) then
+	UPDATE cfp SET nabonado = generado WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND ornidsucursal_cfp = NEW.ornidsucursal_ppf;
+end if;
+return null;
+end;
+$pagado$ language plpgsql;
+
+-- Trigger de actualizacion del monto pagado del prestamo
+drop trigger upd_cfp on pagpf;
+create Trigger upd_cfp after insert on pagpf
+for each row execute procedure upd_monto_cfp();
+
+-------------------------------------------------------------------------------------
+-- Funcion para trigger de insercion en pagos a cuentas de prestamos moral
+create or replace function pay_cmp() returns trigger as $payed$
+declare
+ultimo date;
+fapertura date;
+abono integer;
+monto integer;
+pmin integer;
+interes integer;
+isOK integer;
+pago integer;
+today integer;
+trans integer;
+begin
+if(NEW.nmonto < 0) then
+return NEW;
+end if;
+SELECT max(tfecha_ppm) into ultimo FROM pagpm WHERE scuenta_ppm = NEW.scuenta_ppm AND nidcliente_ppm = NEW.nidcliente_ppm AND ornidsucursal_ppm = NEW.ornidsucursal_ppm;
+SELECT dfecha INTO fapertura FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+SELECT nplazo INTO pmin FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+SELECT nmonto INTO monto FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+SELECT nabonado INTO abono FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+if(ultimo is null)then
+	SELECT extract(month from age(fapertura, now())) INTO isOK;	
+else
+	SELECT extract(month from age(fapertura, now())) INTO today;
+	SELECT extract(month from age(fapertura, ultimo)) INTO pago;
+	isOK := today - pago;
+	if(isOK < 0) then -- wtf!!!!!!!
+		return null;
+	end if;		
+end if;
+interes := 0;
+if(isOK > 3) then -- u'r busted	
+	interes := monto * -15 / 100;	
+	INSERT INTO pagpm (scuenta_ppm, nidcliente_ppm, ornidsucursal_ppm, pagnidsucursal_ppm,nmonto) VALUES (NEW.scuenta_ppm, NEW.nidcliente_ppm, NEW.ornidsucursal_ppm, NEW.pagnidsucursal_ppm, interes);
+end if;
+pmin := monto / pmin;
+trans := monto - abono;
+if((NEW.nmonto + interes) > trans) then
+	NEW.nmonto := trans - intereses;
+	return NEW;
+end if;	
+return NEW;
+end;
+$payed$  language plpgsql;
+
+-- Trigger de insercion en pagpf genera interese y todo
+drop trigger exe_pago_cmp on pagpm;
+create Trigger exe_pago_cmp before insert on pagpm
+for each row execute procedure pay_cmp();
+
+create or replace function upd_monto_cmp() returns trigger as $pagado$ 
+declare
+actual integer;
+monto integer;
+generado integer;
+begin
+SELECT nabonado INTO actual FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+SELECT nmonto INTO monto FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
+SELECT sum(nmonto) INTO generado FROM pagpm WHERE scuenta_ppm = NEW.scuenta_ppm AND nidcliente_ppm = NEW.nidcliente_ppm AND nidsucursal_ppm = NEW.ornidsucursal_ppm;	
+if(generado >= actual) then
+	UPDATE cmp SET nabonado = generado WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND ornidsucursal_cmp = NEW.ornidsucursal_ppm;
+end if;
+return null;
+end;
+$pagado$ language plpgsql;
+
+-- Trigger de actualizacion del monto pagado del prestamo
+drop trigger upd_cmp on pagpm;
+create Trigger upd_cmp after insert on pagpm
+for each row execute procedure upd_monto_cmp();
