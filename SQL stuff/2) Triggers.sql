@@ -241,6 +241,35 @@ drop trigger ok_asignacion on ev_asignado;
 create Trigger ok_asignacion before insert or update on ev_asignado
 for each row execute procedure samePlace();
 -------------------------------------------------------------------------------------
+-- ......
+create or replace function wtf() returns Trigger as $okv$
+declare 
+begin
+NEW.srfc_ee := lower(NEW.srfc_ee);
+return NEW;
+end;
+$okv$  language plpgsql;
+
+-- Trigger de insercion insercion en email empleado
+drop trigger mail_low on emailempleado;
+create Trigger mail_low before insert or update on emailempleado
+for each row execute procedure wtf();
+
+-- ......
+create or replace function wtf2() returns Trigger as $okv$
+declare 
+begin
+NEW.srfc_te := lower(NEW.srfc_te);
+return NEW;
+end;
+$okv$  language plpgsql;
+
+-- Trigger de insercion insercion en telefono empleado
+drop trigger tel_low on telempleado;
+create Trigger tel_low before insert or update on telempleado
+for each row execute procedure wtf2();
+
+-------------------------------------------------------------------------------------
 -- Funcion para trigger de insercion en clientes
 -- Asigna la region y zona de acuerdo al estado (esta funcion modifica el valor de region y zona si es que se paso como argumento de la insercion).
 create or replace function zonifica() returns Trigger as $zone$
@@ -753,7 +782,7 @@ if((NEW.nmonto + interes) > trans) then
 	return NEW;	
 else
 	if((NEW.nmonto + interes) > pmin) then
-		UPDATE cfp SET nabonado = (nabonado + monto * 3 / 100) WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND ornidsucursal_cfp = NEW.ornidsucursal_ppf;	
+		UPDATE cfp SET nabonado = (nabonado + monto * 3 / 100) WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;	
 	end if;
 end if;	
 return NEW;
@@ -773,9 +802,9 @@ generado integer;
 begin
 SELECT nabonado INTO actual FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
 SELECT nmonto INTO monto FROM cfp WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
-SELECT sum(nmonto) INTO generado FROM pagpf WHERE scuenta_ppf = NEW.scuenta_ppf AND nidcliente_ppf = NEW.nidcliente_ppf AND nidsucursal_ppf = NEW.ornidsucursal_ppf;	
+SELECT sum(nmonto) INTO generado FROM pagpf WHERE scuenta_ppf = NEW.scuenta_ppf AND nidcliente_ppf = NEW.nidcliente_ppf AND ornidsucursal_ppf = NEW.ornidsucursal_ppf;	
 if(generado >= actual) then
-	UPDATE cfp SET nabonado = generado WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND ornidsucursal_cfp = NEW.ornidsucursal_ppf;
+	UPDATE cfp SET nabonado = generado WHERE scuenta_cfp = NEW.scuenta_ppf AND nidcliente_cfp = NEW.nidcliente_ppf AND nidsucursal_cfp = NEW.ornidsucursal_ppf;
 end if;
 return null;
 end;
@@ -847,9 +876,9 @@ generado integer;
 begin
 SELECT nabonado INTO actual FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
 SELECT nmonto INTO monto FROM cmp WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
-SELECT sum(nmonto) INTO generado FROM pagpm WHERE scuenta_ppm = NEW.scuenta_ppm AND nidcliente_ppm = NEW.nidcliente_ppm AND nidsucursal_ppm = NEW.ornidsucursal_ppm;	
+SELECT sum(nmonto) INTO generado FROM pagpm WHERE scuenta_ppm = NEW.scuenta_ppm AND nidcliente_ppm = NEW.nidcliente_ppm AND ornidsucursal_ppm = NEW.ornidsucursal_ppm;	
 if(generado >= actual) then
-	UPDATE cmp SET nabonado = generado WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND ornidsucursal_cmp = NEW.ornidsucursal_ppm;
+	UPDATE cmp SET nabonado = generado WHERE scuenta_cmp = NEW.scuenta_ppm AND nidcliente_cmp = NEW.nidcliente_ppm AND nidsucursal_cmp = NEW.ornidsucursal_ppm;
 end if;
 return null;
 end;
