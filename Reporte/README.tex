@@ -140,13 +140,15 @@ Las consultas se encuentran en el script \textit{Consultas.sql}
 
 \section{Reportes}
 
+Los reportes están contenidos dentro de la carpeta \textit{Reportes} y son las consultas con formato de reportes.
+
 \section{Aplicación}
 
 La aplicación esta generada en java, teniendo las siguiente manera de ejecutar la aplicación:\\
 
 Teniendo instalado \textit{apache ant}, nos situaremos en la carpeta del proyecto, de tal forma que estando en el directorio  \textit{Aplicacion Java$/$} basta con ejecutar el comando \textbf{ \textdollar ant jar} y posteriormente ubicarnos dentro del directorio \textit{dist$/$}.
 
-Una vez que hemos generado el tar, podemos ejecutarlo libremente en entorno gráfico con un sencillo doble click en la aplicación generada.\\
+Una vez que hemos generado el tar, podemos ejecutarlo libremente en entorno gráfico con un sencillo doble click en la aplicación generada, cómo se aprecia en el diagrama [\ref{arbol}].\\
 
 Notemos que la interfaz nos pedirá los datos con la que se realizara la conexión a la base de datos, es concerniente de acuerdo a cada usuario. Es necesario mencionar que el dueño de la base de datos sea postgresql, por lo que la contraseña es la del usuario en el sistema, así cómo también dependerá del puerto al que este asignado y el host, también el nombre de la base al cual este asociada, de la misma manera, depende del nombre de la base de datos en la que se han cargado los script, en caso ilustrativo el nombre se ha tomado cómo \textit{"ProyectoFinal"}.
 
@@ -216,6 +218,16 @@ En el diagrama [\ref{Aplicacion2}] se observa la pantalla principal de la aplica
 	\includegraphics[scale=.9]{Normalizacion/Captura6.png}
 	\caption{Posible normalización.}
 	\label{PNS6}
+\end{figure}
+\end{centering}
+
+%%
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.7]{arbol.png}
+	\caption{Ejemplo de la estructura del árbol de direcciones para  ejecutar la aplicación.}
+	\label{arbol}
 \end{figure}
 \end{centering}
 
