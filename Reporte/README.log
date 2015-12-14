@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  14 DEC 2015 04:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  14 DEC 2015 04:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -241,121 +241,122 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--80
  []
 
 [5] [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 143--144
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
-[8] <../Diagramas/Diagrama_Entidad_Relacion.pdf, id=35, 614.295pt x 794.97pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--148
+
+ []
+
+[8] [9]
+<../Diagramas/Diagrama_Entidad_Relacion.pdf, id=38, 614.295pt x 794.97pt>
 File: ../Diagramas/Diagrama_Entidad_Relacion.pdf Graphic file (type pdf)
 
 <use ../Diagramas/Diagrama_Entidad_Relacion.pdf>
 Package pdftex.def Info: ../Diagramas/Diagrama_Entidad_Relacion.pdf used on inp
-ut line 155.
+ut line 157.
 (pdftex.def)             Requested size: 307.14674pt x 397.48402pt.
 
-<../Diagramas/Modelo-Relacional.pdf, id=36, 2629.825pt x 2283.53125pt>
+<../Diagramas/Modelo-Relacional.pdf, id=39, 2629.825pt x 2283.53125pt>
 File: ../Diagramas/Modelo-Relacional.pdf Graphic file (type pdf)
 
 <use ../Diagramas/Modelo-Relacional.pdf>
 Package pdftex.def Info: ../Diagramas/Modelo-Relacional.pdf used on input line 
-164.
+166.
 (pdftex.def)             Requested size: 394.45673pt x 342.51491pt.
 
-Overfull \hbox (4.45673pt too wide) in paragraph at lines 164--165
+Overfull \hbox (4.45673pt too wide) in paragraph at lines 166--167
 [][] 
  []
 
-<Normalizacion/Captura1.png, id=37, 430.60875pt x 544.0325pt>
+<Normalizacion/Captura1.png, id=40, 430.60875pt x 544.0325pt>
 File: Normalizacion/Captura1.png Graphic file (type png)
 
 <use Normalizacion/Captura1.png>
-Package pdftex.def Info: Normalizacion/Captura1.png used on input line 172.
+Package pdftex.def Info: Normalizacion/Captura1.png used on input line 174.
 (pdftex.def)             Requested size: 387.54428pt x 489.62473pt.
 
-<Normalizacion/Captura2.png, id=39, 416.55624pt x 566.115pt>
+<Normalizacion/Captura2.png, id=42, 416.55624pt x 566.115pt>
 File: Normalizacion/Captura2.png Graphic file (type png)
 
 <use Normalizacion/Captura2.png>
-Package pdftex.def Info: Normalizacion/Captura2.png used on input line 180.
+Package pdftex.def Info: Normalizacion/Captura2.png used on input line 182.
 (pdftex.def)             Requested size: 374.89716pt x 509.4988pt.
 
-<Normalizacion/Captura3.png, id=40, 434.62375pt x 565.11125pt>
+<Normalizacion/Captura3.png, id=43, 434.62375pt x 565.11125pt>
 File: Normalizacion/Captura3.png Graphic file (type png)
 
 <use Normalizacion/Captura3.png>
-Package pdftex.def Info: Normalizacion/Captura3.png used on input line 188.
+Package pdftex.def Info: Normalizacion/Captura3.png used on input line 190.
 (pdftex.def)             Requested size: 391.15775pt x 508.59541pt.
 
-Overfull \hbox (1.15775pt too wide) in paragraph at lines 188--189
+Overfull \hbox (1.15775pt too wide) in paragraph at lines 190--191
 [][] 
  []
 
-<Normalizacion/Captura4.png, id=41, 425.59pt x 569.12625pt>
+<Normalizacion/Captura4.png, id=44, 425.59pt x 569.12625pt>
 File: Normalizacion/Captura4.png Graphic file (type png)
 
 <use Normalizacion/Captura4.png>
-Package pdftex.def Info: Normalizacion/Captura4.png used on input line 196.
+Package pdftex.def Info: Normalizacion/Captura4.png used on input line 198.
 (pdftex.def)             Requested size: 383.02745pt x 512.2089pt.
 
-<Normalizacion/Captura5.png, id=42, 444.66125pt x 587.19376pt>
+<Normalizacion/Captura5.png, id=45, 444.66125pt x 587.19376pt>
 File: Normalizacion/Captura5.png Graphic file (type png)
 
 <use Normalizacion/Captura5.png>
-Package pdftex.def Info: Normalizacion/Captura5.png used on input line 204.
+Package pdftex.def Info: Normalizacion/Captura5.png used on input line 206.
 (pdftex.def)             Requested size: 400.19142pt x 528.4695pt.
 
-Overfull \hbox (10.19142pt too wide) in paragraph at lines 204--205
+Overfull \hbox (10.19142pt too wide) in paragraph at lines 206--207
 [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 6.80281pt on input line 207.
+LaTeX Warning: Float too large for page by 6.80281pt on input line 209.
 
-<Normalizacion/Captura6.png, id=43, 436.63126pt x 545.03625pt>
+<Normalizacion/Captura6.png, id=46, 436.63126pt x 545.03625pt>
 File: Normalizacion/Captura6.png Graphic file (type png)
 
 <use Normalizacion/Captura6.png>
-Package pdftex.def Info: Normalizacion/Captura6.png used on input line 212.
+Package pdftex.def Info: Normalizacion/Captura6.png used on input line 214.
 (pdftex.def)             Requested size: 392.9645pt x 490.5281pt.
 
-Overfull \hbox (2.9645pt too wide) in paragraph at lines 212--213
+Overfull \hbox (2.9645pt too wide) in paragraph at lines 214--215
 [][] 
  []
 
-<Conexion.png, id=44, 329.23pt x 344.28625pt>
+<Conexion.png, id=47, 329.23pt x 344.28625pt>
 File: Conexion.png Graphic file (type png)
  <use Conexion.png>
-Package pdftex.def Info: Conexion.png used on input line 221.
+Package pdftex.def Info: Conexion.png used on input line 223.
 (pdftex.def)             Requested size: 329.22919pt x 344.2854pt.
 
-<Interfaz_Principal.png, id=45, 832.10875pt x 635.37375pt>
+<Interfaz_Principal.png, id=48, 832.10875pt x 635.37375pt>
 File: Interfaz_Principal.png Graphic file (type png)
 
 <use Interfaz_Principal.png>
-Package pdftex.def Info: Interfaz_Principal.png used on input line 229.
+Package pdftex.def Info: Interfaz_Principal.png used on input line 231.
 (pdftex.def)             Requested size: 416.05336pt x 317.6861pt.
 
-Overfull \hbox (26.05336pt too wide) in paragraph at lines 229--230
+Overfull \hbox (26.05336pt too wide) in paragraph at lines 231--232
 [][] 
  []
 
-[9 <../Diagramas/Diagrama_Entidad_Relacion.pdf>] [10 <../Diagramas/Modelo-Relac
-ional.pdf>] [11 <./Normalizacion/Captura1.png>] [12 <./Normalizacion/Captura2.p
-ng>] [13 <./Normalizacion/Captura3.png>] [14 <./Normalizacion/Captura4.png>]
-[15 <./Normalizacion/Captura5.png>] [16 <./Normalizacion/Captura6.png>]
-[17 <./Conexion.png>] [18 <./Interfaz_Principal.png>] (./README.aux
+[10 <../Diagramas/Diagrama_Entidad_Relacion.pdf>] [11 <../Diagramas/Modelo-Rela
+cional.pdf>] [12 <./Normalizacion/Captura1.png>] [13 <./Normalizacion/Captura2.
+png>] [14 <./Normalizacion/Captura3.png>] [15 <./Normalizacion/Captura4.png>]
+[16 <./Normalizacion/Captura5.png>] [17 <./Normalizacion/Captura6.png>]
+[18 <./Conexion.png>] [19 <./Interfaz_Principal.png>] (./README.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) ) 
 Here is how much of TeX's memory you used:
  2582 strings out of 493117
  36603 string characters out of 6135433
- 102042 words of memory out of 5000000
+ 102043 words of memory out of 5000000
  6013 multiletter control sequences out of 15000+600000
  9155 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -367,10 +368,10 @@ b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
 /local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
 cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on README.pdf (18 pages, 1504236 bytes).
+Output written on README.pdf (19 pages, 1504918 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 123 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

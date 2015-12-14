@@ -8,4 +8,4 @@
 \contentsline {section}{\numberline {5}Consultas}{8}
 \contentsline {section}{\numberline {6}Reportes}{8}
 \contentsline {section}{\numberline {7}Aplicaci\'on}{8}
-\contentsline {section}{\numberline {8}Figuras}{9}
+\contentsline {section}{\numberline {8}Figuras}{10}
