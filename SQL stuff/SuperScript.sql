@@ -2398,7 +2398,7 @@ INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('dui@consectetueradipisc
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('aliquam.erat.volutpat@semperduilectus.com',98);
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('iaculis@ante.org',99);
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('feugiat@nisicumsociis.org',100);
- INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('interdum.libero@nonlobortis.com',100);
+INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('interdum.libero@nonlobortis.com',100);
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('vivamus@sit.org',101);
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('eros.nec@rutrummagnacras.edu',102);
 INSERT INTO emailfisica (semailf,nidcliente_ef) VALUES ('malesuada.vel@nequepellentesquemassa.edu',103);

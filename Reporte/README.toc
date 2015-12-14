@@ -1,0 +1,11 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Modelo Entidad Relaci\'on}{3}
+\contentsline {subsection}{\numberline {1.1}Entidades}{3}
+\contentsline {subsection}{\numberline {1.2}Relaciones}{4}
+\contentsline {section}{\numberline {2}Modelo Relacional}{5}
+\contentsline {section}{\numberline {3}Normalizaci\'on}{6}
+\contentsline {section}{\numberline {4}SQL}{6}
+\contentsline {section}{\numberline {5}Consultas}{8}
+\contentsline {section}{\numberline {6}Reportes}{8}
+\contentsline {section}{\numberline {7}Aplicaci\'on}{8}
+\contentsline {section}{\numberline {8}Figuras}{9}

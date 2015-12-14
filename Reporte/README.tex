@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx} % figuras
+\usepackage{subfigure} % subfiguras
+\usepackage{lscape}
+
+
+\title{Fundamentos de Bases de Datos \\ Proyecto Final}
+\author{Herrera Ortíz, Oscar \\ Galván Gámez, Edwin Antonio \\ Mayesell Colorado, Sergio}
+
+\begin{document}
+\maketitle
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Modelo Entidad Relación}
+El modelo entidad relación esta constituido por los siguientes elementos:
+
+\subsection{Entidades}
+\begin{itemize}
+\item Cliente: Este es la entidad de modelar, como su nombre lo dice a un cliente en el banco, dado que un cliente puede ser representación de un cliente físico (una persona interesada en ir al banco) cómo una persona moral (un ente abstracto, representante de una institución, grupo de personas, etc.). Encontramos que estos clientes pueden tener atributos en  común cómo lo son el correo electrónico, el RFC entre otros. \\
+
+De esta entidad se derivan dos entidades más por medio de la herencia, que son las (personas) físicas y morales, cada uno con sus respectivos atributos que las caracteriza, observamos que se ha optado usar herencia total sin traslape, pues \textit{"Todos los clientes son o bien, personas morales, instituciones ó personas físicas"}. De las cuales, cada una tiene su propio conjunto de atributos características de cada cliente, cómo lo son las razones sociales y los sitios web para las personas morales, cómo lo son el nombre, fecha de nacimiento, etc para las personas físicas.\\
+
+De los créditos pasados hemos optado en el modelo determinarlo cómo un atributo calculado pues no hay manera de representar históricos en el diagrama.  Para las regiones y las zonas se ha optado por ser un elemento más del atributo compuesto por la dirección.
+
+\item Sucursal: Para está entidad se modelo cómo una entidad abstracta por completo, en la cual se considero nuevamente la dirección cómo en cliente, cómo usualmente la conocemos, sumado con la zona y la región, el área de la superficie del banco es un atributo que se da, así cómo en tipo es la descripción de la sucursal, de tal manera que este campo describe si una sucursal está dentro de una plaza o no. El identificador de la sucursal y el nombre también están dentro del modelo.
+
+\item Caja: Esta entidad se destaco por tener una gran importancia en el banco, sin embargo no son modelados cómo una entidad débil de este, pues respondiendo a la pregunta \textit{"¿Pasa algo si no existen ventanillas en el banco?"} La respuesta es sí, muchas cosas dejan de tener sentido, por ese motivo no se le excluyo de ser entidad débil.\\
+
+A su vez, las cajas se derivan en dos entidades más, las ventanillas cómo las conocemos en un banco y los cajeros automáticos (ATM). Nuevamente se considero una herencia total sin traslape.
+
+\item Los empleados del banco también son otra entidad a considerar, de éstos no se considero más allá de aspectos básicos pues no es del interés del proyecto el modelar la estructura interna del banco.
+
+\item Cuentas: Las cuentas, nuevamente son una entidad abstracta que no tiene un atributo en general por si mismo, sin embargo se deriva en dos entidades más, la entidad de préstamo, así cómo la entidad de ahorro (débitos) en la parte de prestamos se modelaron los atributos solicitados en la especificación del proyecto.
+
+Cómo entidades débiles encontramos:
+
+\item Tarjetas: Es una entidad débil considerando que pueden o no tener una cuenta la necesidad de una tarjeta. Las tarjetas se derivan a su vez en tarjetas de crédito y de préstamo, la cuál nuevamente se modela cómo una herencia total sin traslape.
+
+\item Quejas: Dado que son elementos que pueden no existir se modelaron cómo una entidad débil con respecto a los servicios que se ofrecen en un banco, sus atributos son los especificados en el proyecto.
+
+\item Evaluaciones: Tiene el mismo planteamiento y justificación de las quejas.
+
+\end{itemize}
+
+\subsection{Relaciones}
+
+\begin{itemize}
+\item Solicita: Es una relación ternaria entre el Cliente, el Banco y la Cuenta, es la representación de un cliente que buscar abrir una cuenta dentro de un banco, importa saber la fecha en que la solicito y también nos interesa saber el tiempo que tiene el cliente en el banco. La cardinalidad de ésta es $n:n$
+
+\item Pago: Las entidades participante son las mismas que la relación \textit{Solicita}, los atributos de está relación son la fecha de pago y el monto del mismo. Consideramos que el pago debe de hacerse en una sucursal. La cardinalidad de ésta es $n:n$
+
+\item Asigna (Tarjeta): Dado que la entidad \textit{Tarjeta} es una entidad débil con respecto a la entidad \textit{Ahorro}, la relación de ésta es una relación débil y total de cardinalidad $n:1$
+
+\item Asignado (Ventanilla) Es la relación que está encargada de asignar una ventanilla a un empleado. Resulta ser de interés la fecha a la que fue asignado ese empleado a esa ventanilla. Por parte de la ventanilla resulta ser una relación de participación total y de cardinalidad n:1 pues \textit{"Toda ventanilla está asignada a un empleado y un empleado está asignada a una sola ventanilla"}.
+
+\item Genera (Queja): Dado que \textit{Queja} es una entidad débil, la relación también lo es, nos interesa saber de esta relación la cantidad de quejas que se ha generado, por eso el atributo calculado en la relación.
+
+\item Genera (Evaluación) : De la misma naturaleza que la creación de una queja, es una entidad débil a la cual está asociada, entonces la relación también lo es, ésta no tiene atributos de interés.
+\end{itemize}
+
+Podemos observar el modelo Entidad Relación en el diagrama [\ref{MER}]
+
+\section{Modelo Relacional}
+
+Siguiendo las reglas de traducción del modelo Entidad Relación al modelo Relacional obtenemos en el diagrama [\ref{MR}].\\
+
+Es importante notar que debido a la herencia manejada en el modelo Entidad Relación se duplicaron tablas que \textit{"modelan lo mismo"} así que las tablas al final del día tienen su representante para personas morales y personas físicas, generando un comportamiento similar en los créditos y las tarjetas.\\
+
+
+\section{Normalización}
+
+Es importante hacer notar que se opto por normalizar con respecto a BCNF pues contiene en particular a 3NF, usando las dependencias funcionales triviales, buscando generar dependencias funcionales con respecto a las dependencias funcionales que se pueden generar, sin embargo, se genero una segmentación no deseable, optando, cómo se discutió en clase, existen situaciones en la que no es recomendable generar una normalización al esquema, mostrado en los diagramas [\ref{PNS1} - \ref{PNS6}].\\
+
+Observemos que genera una gran desventaja, las direcciones se segmentan de la entidad correspondiente, conservandose los datos almacenados, sin embargo generando una tabla más sin generar un beneficio, notamos también que perdemos integridad referencial por la eliminación de pago/retiro.
+
+Por lo que no generamos ninguna mejora al esquema.
+
+\section{SQL}
+
+Hemos generado el poblado de la base de datos con los siguientes script sql:
+
+\begin{itemize}
+\item AbonoAhorroFisicas.sql\item atm.sql\item CAhorroMorales.sql\item Consultas\_no\_triviales.sql\item Correofisicas.sql\item CuentaAhorroFisicas.sql\item CuentasPersonasFisicas.sql\item CuentasPrestamoFisicas.sql\item CuentasPrestamoMorales.sql\item EmailEmpleados.sql\item emailMoral.sql\item empleado.sql\item EvalFisica.sql\item EvalMoral.sql\item fisica.sql\item moral.sql\item PagoPersonasMorales.sql\item PagosPrestamosPersonasFisicas.sql\item PagoTarjetasAhorroMorales.sql\item \textbf{public.sql}\item Qfisica.sql\item QMoral.sql\item RetiroAhorroATMFisica.sql\item RetiroATMMorales.sql\item RetiroCuentasVentanilla.sql\item RetiroPrestamoMorales.sql\item RetiroPrestamosFisicos.sql\item RetirosVentanillaFisica.sql\item Sucursal.sql\item TarjetaCreditoMoral.sql\item TarjetasAhorroFisica.sql\item TarjetasDebitoFisicas.sql\item tarjetasDebitoMoral.sql\item TelefonosFisicas.sql\item TelefonosMorales.sql\item TelEmpleado.sql
+\item \textbf{Triggers.sql}\item Ventanillas\_Asignadas.sql\item ventanillas.sql
+\end{itemize}
+
+
+Notemos que \textbf{public.sql} es el script encargado de generar el esquema de la base de datos, el archivo \textbf{Triggers.sql} es el archivo donde están almacenados los triggers de la base.
+
+\section{Consultas}
+
+\section{Reportes}
+
+\section{Aplicación}
+
+La aplicación esta generada en java, teniendo las siguiente manera de ejecutar la aplicación:\\
+
+Dado que es una aplicación generada en NetBeans basta con abrir el proyecto y ejecutarlo, una vez ejecutado el proyecto, notemos las capturas de pantalla en los diagramas [\ref{Aplicacion1} - \ref{Aplicacion2}]\\
+
+Notemos que la interfaz nos pedirá los datos con la que se realizara la conexión a la base de datos, es concerniente de acuerdo a cada usuario. Es necesario mencionar que el dueño de la base de datos sea postgresql, por lo que la contraseña es la del usuario en el sistema, así cómo también dependerá del puerto al que este asignado y el host, también el nombre de la base al cual este asociada, de la misma manera, depende del nombre de la base de datos en la que se han cargado los script, en caso ilustrativo el nombre se ha tomado cómo \textit{"ProyectoFinal"}.
+
+En el diagrama [\ref{Aplicacion2}] se observa la pantalla principal de la aplicación.
+
+\newpage
+\section{Figuras}
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=0.5]{../Diagramas/Diagrama_Entidad_Relacion.pdf}
+	\caption{Modelo Entidad Relacional del proyecto.}
+	\label{MER}
+\end{figure}
+\end{centering}
+
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=0.15]{../Diagramas/Modelo-Relacional.pdf}
+	\caption{Modelo Relacional del proyecto.}
+	\label{MR}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura1.png}
+	\caption{Posible normalización.}
+	\label{PNS1}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura2.png}
+	\caption{Posible normalización.}
+	\label{PNS2}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura3.png}
+	\caption{Posible normalización.}
+	\label{PNS3}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura4.png}
+	\caption{Posible normalización.}
+	\label{PNS4}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura5.png}
+	\caption{Posible normalización.}
+	\label{PNS5}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.9]{Normalizacion/Captura6.png}
+	\caption{Posible normalización.}
+	\label{PNS6}
+\end{figure}
+\end{centering}
+
+%%
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=1.]{Conexion.png}
+	\caption{Interfaz de Conexión}
+	\label{Aplicacion1}
+\end{figure}
+\end{centering}
+
+\begin{centering}
+\begin{figure}[htp]
+	\includegraphics[scale=.5]{Interfaz_Principal.png}
+	\caption{Pantalla principal de la interfaz.}
+	\label{Aplicacion2}
+\end{figure}
+\end{centering}
+
+
+\end{document}
