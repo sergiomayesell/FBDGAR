@@ -1,4 +1,4 @@
-puedes compilar desde consola con:
+puedes compilar desde consola desde esta carpeta con(debes tener ant) :
 $ant jar
 despues ir a la carpeta dis donde encontraras Btras.jar el cual es la aplicacion.
 

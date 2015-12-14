@@ -275,7 +275,7 @@ public class UserInterface extends javax.swing.JFrame {
 
         jLabel23.setText("Sitio Web");
 
-        jTextField12.setToolTipText("Ingrese sitio web de la empresa.");
+        jTextField12.setToolTipText("<html>Ingrese sitio web de la empresa.<br/>Empesando por www.<html/>");
 
         jLabel24.setText("Razon Social");
 
@@ -797,7 +797,7 @@ public class UserInterface extends javax.swing.JFrame {
             case 3:
                 tableTo = "cfp";
                 tableFrom = "fisica";
-                sfix = "_cmp";
+                sfix = "_cfp";
                 x = "_f";                
                 break;
             default:
@@ -893,7 +893,7 @@ public class UserInterface extends javax.swing.JFrame {
             case 3:
                 tableTo = "cfa";
                 tableFrom = "fisica";
-                sfix = "_cmp";
+                sfix = "_cfa";
                 x = "_f";
                 tar = "_tdf";
                 cred = "_tcf";
@@ -1223,6 +1223,7 @@ public class UserInterface extends javax.swing.JFrame {
                 jLabel26.setText(values.get("snombre") + " " + values.get("spaterno") + " " + values.get("smaterno"));
                 clearTextTabNuevoCliente();
                 jTabbedPane1.setSelectedIndex(1);
+                return;
             }
             if (salida == 0) {
                 this.errorWin("No se puede generar el registro en la base de datos.\nConsulte a su administrador de IT.", "");
@@ -1395,10 +1396,10 @@ public class UserInterface extends javax.swing.JFrame {
     //private ResultSet r;
     private final Validator validator = new Validator();
     private final Map<String, Zonificador> zonas = new HashMap<>();
-    private final String estados[] = {"Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
-        "Coahuila", "Colima", "Distrito Federal", "Durango", "Estado de México", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Michoacán",
-        "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora",
-        "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"};
+    private final String estados[] = {"Aguascalientes", "Baja California Norte", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua",
+        "Coahuila", "Colima", "Distrito Federal", "Durango", "Estado de Mexico", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Michoacan",
+        "Morelos", "Nayarit", "Nuevo Leon", "Oaxaca", "Puebla", "Queretaro", "Quintana Roo", "San Luis Potosi", "Sinaloa", "Sonora",
+        "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatan", "Zacatecas"};
     //{#R, #Z} Regiones 1 - 6
     private final int zone[] = {2, 1, 1, 6, 5, 1,
         3, 2, 4, 1, 4, 2, 5, 4, 2, 2,
@@ -1617,7 +1618,7 @@ public class UserInterface extends javax.swing.JFrame {
             errorMsg += "Ingrese Calle\n";
         }
         dir.put("sdireccion", v);
-        v = jTextField6.getText();
+        v = jTextField6.getText().trim();
         if (v.trim().isEmpty()) {
             errorMsg += "Ingrese numero exterior\n";
         } else {
@@ -1628,7 +1629,7 @@ public class UserInterface extends javax.swing.JFrame {
                 errorMsg += "Número exterior invalido.\n";
             }
         }
-        v = jTextField7.getText();
+        v = jTextField7.getText().trim();
         if (!v.trim().isEmpty()) {
             try {
                 Integer.parseInt(v);
@@ -1637,7 +1638,7 @@ public class UserInterface extends javax.swing.JFrame {
                 errorMsg += "Número interior invalido.\n";
             }
         }
-        v = jTextField10.getText();
+        v = jTextField10.getText().trim();
         if (v.trim().isEmpty()) {
             errorMsg += "Ingrese codigo postal\n";
         } else {

@@ -612,7 +612,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField12">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTextField12.setToolTipText(&quot;Ingrese sitio web de la empresa.&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTextField12.setToolTipText(&quot;&lt;html&gt;Ingrese sitio web de la empresa.&lt;br/&gt;Empesando por www.&lt;html/&gt;&quot;);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
